@@ -1,4 +1,4 @@
-package com.estagio.backend;
+package com.estagio.backend.dao;
 
 import com.estagio.backend.dao.EstagiarioDao;
 import com.estagio.backend.model.Estagiario;
@@ -22,15 +22,41 @@ public class FakeEstagiarioDataAccessService implements EstagiarioDao {
 
     @Override
     public int insertEstagiario(UUID id, Estagiario estagiario) {
-        DB.add(new Estagiario(id, estagiario.getNome(), estagiario.getEmail(), estagiario.getTelefone(), estagiario.getFoto(), estagiario.getComprovanteMatricula(), estagiario.getInteresses(), estagiario.getDominios()));
-        return 1;
+        String sql = "" +
+                "INSERT INTO estagiario (" +
+                " nome, " +
+                "email, " +
+                " telefone, " +
+                " foto, " +
+                "comprovanteMatricula, " +
+                " interesses, " +
+                " dominios) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        return jdbcTemplate.update(
+                sql,
+                estagiario.getNome(),
+                estagiario.getEmail(),
+                estagiario.getTelefone(),
+                estagiario.getFoto(),
+                estagiario.getComprovanteMatricula(),
+                estagiario.getInteresses(),
+                estagiario.getDominios());
     }
 
     @Override
     public List<Estagiario> selectAllPeople() {
-
-
-        return DB;
+        final String sql = "SELECT * FROM estagiario";
+        return jdbcTemplate.query(sql, (resultSet, i) -> {
+            UUID id = UUID.fromString(resultSet.getString("id"));
+            String nome = resultSet.getString("nome");
+            String email = resultSet.getString("email");
+            String telefone = resultSet.getString("telefone");
+            String foto = resultSet.getString("foto");
+            String comprovanteMatricula = resultSet.getString("comprovanteMatricula");
+            String interesses = resultSet.getString("interesses");
+            String dominios = resultSet.getString("dominios");
+            return new Estagiario(id, nome, email, telefone, foto, comprovanteMatricula, interesses, dominios);
+        });
     }
 
     @Override
@@ -41,33 +67,30 @@ public class FakeEstagiarioDataAccessService implements EstagiarioDao {
 
     @Override
     public int deleteEstagiarioById(UUID id) {
-        Optional<Estagiario> estagiarioMaybe = selectEstagiarioById(id);
-        if(estagiarioMaybe.isEmpty()){
-            return 0;
-        }
+        String sql ="DELETE FROM estagiario WHERE id = ?";
+        return jdbcTemplate.update(sql, id);
 
-        DB.remove(estagiarioMaybe.get());
-        return 1;
     }
 
     @Override
-    public int updateEstagiarioById(UUID id, Estagiario update) {
-
-        return selectEstagiarioById(id)
-                .map(estagiario ->{
-                    int indexOfEstagiarioToUpdate = DB.indexOf(estagiario);
-                    if(indexOfEstagiarioToUpdate >= 0) {
-                        DB.set(indexOfEstagiarioToUpdate, new Estagiario(id, update.getNome(),
-                                update.getEmail(),
-                                update.getTelefone(),
-                                update.getFoto(),
-                                update.getComprovanteMatricula(),
-                                update.getInteresses(),
-                                update.getDominios()));
-                        return 1;
-                    }
-                    return 0;
-                })
-                .orElse(0);
+    public int updateEstagiarioById(UUID id, Estagiario estagiario) {
+        String sql = "" +
+                "UPDATE estagiario" +
+                " SET nome = ?," +
+                " SET email = ?," +
+                " SET telefone = ?," +
+                " SET foto = ?," +
+                " SET comprovanteMatricula = ?," +
+                " SET interesses = ?," +
+                " SET dominios = ?," +
+                "WHERE id = ?";
+        return jdbcTemplate.update(sql, estagiario.getNome(),
+                estagiario.getEmail(),
+                estagiario.getTelefone(),
+                estagiario.getFoto(),
+                estagiario.getComprovanteMatricula(),
+                estagiario.getInteresses(),
+                estagiario.getDominios(),
+                id);
     }
 }

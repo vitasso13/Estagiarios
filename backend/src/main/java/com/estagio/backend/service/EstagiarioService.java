@@ -4,19 +4,24 @@ import com.estagio.backend.dao.EstagiarioDao;
 import com.estagio.backend.model.Estagiario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.estagio.backend.dao.EstagiarioDao;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+
 @Service
 public class EstagiarioService {
+
     private final EstagiarioDao estagiarioDao;
 
+
     @Autowired
-    public EstagiarioService(@Qualifier("fakeDao") EstagiarioDao estagiarioDao) {
+    public EstagiarioService(@Qualifier("postgres") EstagiarioDao estagiarioDao) {
         this.estagiarioDao = estagiarioDao;
     }
 

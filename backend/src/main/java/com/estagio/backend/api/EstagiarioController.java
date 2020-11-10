@@ -3,6 +3,7 @@ package com.estagio.backend.api;
 import com.estagio.backend.model.Estagiario;
 import com.estagio.backend.service.EstagiarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
