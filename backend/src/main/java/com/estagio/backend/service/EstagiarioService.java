@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.estagio.backend.dao.EstagiarioDao;
 
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@CrossOrigin(origins = "http://localhost:8080")
+
 @Service
 public class EstagiarioService {
 
@@ -47,5 +46,4 @@ public class EstagiarioService {
         return estagiarioDao.updateEstagiarioById(id, newEstagiario);
 
     }
-
 }
