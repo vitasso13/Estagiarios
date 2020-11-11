@@ -13,6 +13,8 @@ import java.util.UUID;
 
 @RequestMapping("api/v1/estagiario")
 @RestController
+
+@CrossOrigin(origins = { "*" })
 public class EstagiarioController {
     private final EstagiarioService estagiarioService;
 

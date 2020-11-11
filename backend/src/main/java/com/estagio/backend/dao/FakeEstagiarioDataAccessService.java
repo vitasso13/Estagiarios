@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.List;
+
 @Repository("postgres")
 public class FakeEstagiarioDataAccessService implements EstagiarioDao {
     private static final List<Estagiario> DB = new ArrayList<>();
@@ -24,16 +25,18 @@ public class FakeEstagiarioDataAccessService implements EstagiarioDao {
     public int insertEstagiario(UUID id, Estagiario estagiario) {
         String sql = "" +
                 "INSERT INTO estagiario (" +
-                " nome, " +
+                "id, "+
+                "nome, " +
                 "email, " +
-                " telefone, " +
-                " foto, " +
+                "telefone, " +
+                "foto, " +
                 "comprovanteMatricula, " +
-                " interesses, " +
-                " dominios) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                "interesses, " +
+                "dominios) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         return jdbcTemplate.update(
                 sql,
+                id,
                 estagiario.getNome(),
                 estagiario.getEmail(),
                 estagiario.getTelefone(),
@@ -77,13 +80,13 @@ public class FakeEstagiarioDataAccessService implements EstagiarioDao {
         String sql = "" +
                 "UPDATE estagiario" +
                 " SET nome = ?," +
-                " SET email = ?," +
-                " SET telefone = ?," +
-                " SET foto = ?," +
-                " SET comprovanteMatricula = ?," +
-                " SET interesses = ?," +
-                " SET dominios = ?," +
-                "WHERE id = ?";
+                " email = ?," +
+                " telefone = ?," +
+                " foto = ?," +
+                " comprovanteMatricula = ?," +
+                " interesses = ?," +
+                " dominios = ?" +
+                " WHERE id = ?";
         return jdbcTemplate.update(sql, estagiario.getNome(),
                 estagiario.getEmail(),
                 estagiario.getTelefone(),
