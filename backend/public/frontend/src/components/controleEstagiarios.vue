@@ -4,22 +4,23 @@
 
     <br />
     <div class="previous">
-      
+      <p>Adicionar um candidato</p>
       
       <div id="left">
         <label for="foto">Foto:</label>
-        <div id="imgbox">
-          <img src="" height="200" alt="Selecione uma foto" />
-        </div><br>
         <input
         name="foto"
         type="file"
-        id="file"
+        id="Image"
         class="custom-file-input"
         accept="image/*"
         @change="previewImage($event)"
         required
-      />
+      /><br>
+        <div id="imgbox">
+          <img src="" height="200" alt="Selecione uma foto" />
+        </div><br>
+        
         
         <label for="duration"> Nome:</label>
         <input name="nome" type="text" v-model="applicants.nome" required />
@@ -30,6 +31,10 @@
       </div>
       <div id="right">
         <label for="duration">Comprovante de Matricula:</label>
+        
+        <div id="imgbox">
+        
+        
         <input
           type="file"
           id="pdf"
@@ -38,14 +43,14 @@
           @change="previewComprovante($event)"
           required
         />
-
-        <label for="duration">Interesses:</label>
+        </div>
+        <label for="duration">Areas de interesses:</label>
         <textarea type="text" v-model="applicants.interesses" required>
         </textarea>
-        <label for="duration">Domínios:</label>
+        <label for="duration">Áreas de domínio:</label>
         <textarea type="text" v-model="applicants.dominios" required>
         </textarea>
-        <button @click="addEstagiario">Adicionar um estagiário</button>
+        <button @click="addEstagiario">Adicionar um estagiário</button><br>
       </div>
     </div>
     <ListaEstagiarios ref="Lista"/>
@@ -163,7 +168,7 @@ export default {
       this.deleteEstagiario();
     },
     deleteEstagiario() {
-      $(".previous[input]").val('');
+      $("[#image][#pdf]").val('');
       const preview = document.querySelector("img");
       preview.src = "";
       this.applicants.previous = "";
@@ -199,13 +204,17 @@ label {
   margin: 20px 0 10px;
 }
 input {
+  
   size: 30px;
+  width: 95%;
+  padding: 3px;
   font-size: 15px;
   border: 1px double rgb(102, 97, 96);
   border-radius: 4px;
 }
 textarea {
   font-size: 15px;
+  width: 95%;
   border: 1px double rgb(102, 97, 96);
   border-radius: 4px;
 }
@@ -236,15 +245,16 @@ span:hover {
   margin-bottom: 10px;
 }
 #left {
+  border: 1px solid;
   float: left;
-  bottom: 2px;
-  margin: 20px 10px;
-  padding: 5px;
+  left: 0;
+  
 }
 #right {
-  float: left;
-  margin: 20px 10px;
-  padding: 5px;
+  border: 1px solid;
+  float: right;
+  bottom: 2px;
+  margin: 5px;
 }
 img {
   max-width: 100%;
@@ -260,6 +270,9 @@ img {
   max-height: 400px;
   max-width: 300px;
   max-height: 400px;
+}
+.custom-file-input{
+  max-width: 300px;
 }
 h1{
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

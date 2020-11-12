@@ -3,7 +3,6 @@
  
  
   <div class="infos">
-    <h1>Lista de Estagiarios Cadastrados</h1>
     <div v-for="estagiario in estagiarios" :key="estagiario.id">
       <div class="estagiarioMostra">
         <div id="imgbox">
@@ -49,12 +48,12 @@
         </div>
 
         <div>
-          <p id="estilo2">Interesses:</p>
+          <p id="estilo2">Áreas de interesses:</p>
           <textarea v-model="estagiario.interesses"></textarea>
         </div>
 
         <div>
-          <p id="estilo2">Domínios:</p>
+          <p id="estilo2">Áreas de domínio:</p>
           <textarea v-model="estagiario.dominios"></textarea>
         </div>
 
@@ -84,7 +83,6 @@ export default {
   },
   methods: {
     previewFiles() {
-      const preview = document.querySelector("img");
       const file = document.querySelector("input[type=file]").files[0];
       const reader = new FileReader();
       var that = this;
@@ -92,8 +90,8 @@ export default {
         "load",
         function () {
           // convert image file to base64 string
-          preview.src = reader.result;
-          that.salvaImagem(JSON.stringify(preview.src));
+          that.getImage(reader.result)
+          that.salvaImagem(JSON.stringify(reader.result));
         },
         false
       );
@@ -186,6 +184,7 @@ export default {
   margin-top: 60px;
 }
 label {
+  
   display: block;
   margin: 20px 0 10px;
 }
@@ -204,7 +203,7 @@ textarea {
 }
 #atualiza {
   font-size: 16px;
-  background: rgb(64, 171, 179);
+  background: rgb(64, 179, 140);
   padding: 0.4rem 1.3rem;
   display: inline-block;
   text-align: center;
@@ -255,4 +254,8 @@ img {
 #baixarFoto{
   position: relative;
 }
+.custom-file-input{
+  max-width: 300px;
+}
+
 </style>
