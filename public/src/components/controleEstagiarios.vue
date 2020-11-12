@@ -27,20 +27,19 @@
         <label for="duration">Email:</label>
         <input type="text" v-model="applicants.email" required />
         <label for="duration">Telefone:</label>
-        <input type="text" v-model="applicants.telefone" required />
+        <input type="text" v-model="applicants.telefone" required /><p></p>
       </div>
       <div id="right">
         <label for="duration">Comprovante de Matricula:</label>
         
-        <div id="imgbox">
-        
-        
+        <div id="imgbox"> 
         <input
           type="file"
           id="pdf"
           class="custom-file-input"
           accept=".pdf"
           @change="previewComprovante($event)"
+          ref="pdfRead"
           required
         />
         </div>
@@ -59,9 +58,7 @@
 
 <script>
 import api from "./api";
-import $ from 'jquery'
 import ListaEstagiarios from './listaEstagiarios.vue'
-//const emitter = mitt()
 
 export default {
   name: "ControleEstagiarios",
@@ -168,8 +165,8 @@ export default {
       this.deleteEstagiario();
     },
     deleteEstagiario() {
-      $("[#image][#pdf]").val('');
       const preview = document.querySelector("img");
+      this.$refs.pdfRead.files = ''
       preview.src = "";
       this.applicants.previous = "";
       this.applicants.nome = "";
@@ -195,7 +192,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin: auto;
 
   
 }
@@ -219,26 +216,25 @@ textarea {
   border-radius: 4px;
 }
 button {
-  font-size: 16px;
+  font-size: 20px;
   background: rgb(64, 179, 140);
   padding: 0.4rem 1.3rem;
-  display: block;
-  text-align: center;
+  left: 0%;
+  float: right;
   border: none;
   cursor: pointer;
   border-radius: 4px;
-  margin: 10px;
+  margin-right: 2px;
+  bottom: 2px;
+  margin: 5px;
 }
-span {
-  width: 30px;
-  float: right;
-  cursor: pointer;
+button:hover{
+  background: rgb(95, 194, 161);
 }
-span:hover {
-  color: brown;
-}
+
 .previous {
   display: inline-block;
+  max-width: 1200px;
   border: 1.5px solid;
   border-radius: 6px;
   padding: 5px;
@@ -246,15 +242,17 @@ span:hover {
 }
 #left {
   border: 1px solid;
-  float: left;
-  left: 0;
-  
+  display: inline-block;
+  bottom: 2px;
+  margin: 2px;
 }
+  
+
 #right {
   border: 1px solid;
   float: right;
   bottom: 2px;
-  margin: 5px;
+  margin: 2px;
 }
 img {
   max-width: 100%;
@@ -273,6 +271,7 @@ img {
 }
 .custom-file-input{
   max-width: 300px;
+  margin: auto;
 }
 h1{
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

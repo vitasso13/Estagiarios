@@ -5,6 +5,7 @@
   <div class="infos">
     <div v-for="estagiario in estagiarios" :key="estagiario.id">
       <div class="estagiarioMostra">
+        <div>
         <div id="imgbox">
           <img
             height="200"
@@ -12,15 +13,16 @@
             v-bind:src="getImage(estagiario.foto)"
             
           />
+          
+            
+        </div>
+
+        <div>
           <a id="baixarFoto"
               v-bind:href="estagiario.foto"
               title="Baixar comprovante de matrícula"
               v-bind:download="estagiario.nome + '_foto'"
-            >Baixar foto</a
-            >
-        </div>
-
-        <div>
+            >Baixar foto</a>
           <p id="estilo2">Nome:</p>
           <input v-model="estagiario.nome" />
         </div>
@@ -67,6 +69,7 @@
         </button>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -186,18 +189,21 @@ export default {
 label {
   
   display: block;
-  margin: 20px 0 10px;
+  margin: 2px;
 }
 input {
-  size: auto;
-  font-size: 20px;
+  size: 15px;
+  width: 95%;
+  padding: 3px;
+  font-size: 15px;
   border: 1px double rgb(102, 97, 96);
   border-radius: 4px;
 }
 textarea {
   size: auto;
-  height: 100px;
-  font-size: 20px;
+  height: 80px;
+  width: 95%;
+  font-size: 15px;
   border: 1px double rgb(102, 97, 96);
   border-radius: 4px;
 }
@@ -212,6 +218,9 @@ textarea {
   border-radius: 4px;
   margin: 10px;
 }
+#atualiza:hover{
+background: rgb(84, 196, 158);
+}
 #remove {
   font-size: 16px;
   background: rgb(179, 64, 64);
@@ -223,14 +232,10 @@ textarea {
   border-radius: 4px;
   margin: 10px;
 }
-span {
-  width: 30px;
-  float: right;
-  cursor: pointer;
+#remove:hover{
+  background: rgb(218, 28, 28);
 }
-span:hover {
-  color: brown;
-}
+
 .estagiarioMostra {
   float: left;
   margin: 20px 10px;
@@ -245,6 +250,7 @@ img {
   object-fit: cover;
 }
 #imgbox {
+  margin: auto;
   top: 5px;
   left: 3px;
   border: 5px solid black;
