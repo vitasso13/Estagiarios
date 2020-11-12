@@ -4,6 +4,7 @@ import com.estagio.backend.model.Estagiario;
 import com.estagio.backend.service.EstagiarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -11,7 +12,8 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("api/v1/estagiario")
+@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
+@RequestMapping(value = "api/v1/estagiario")
 @RestController
 public class EstagiarioController {
     private final EstagiarioService estagiarioService;
