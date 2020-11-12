@@ -2,9 +2,9 @@
 
 ## Aplicativo Spring Boot+Vue.js para controle de estagiários
 **Está aplicação implementa e consome uma API REST utilizando Spring Boot com Maven e JAVA + VueJS + PostgreSQL.**
-![Adição de estagiários com método http POST ](https://imgur.com/tb32fOR)
+![Adição de estagiários com método http POST ](https://ibb.co/F7RHbL9)
 
-![Listagem, remoção e edição com os métodos http GET, PUT e DELETE](https://imgur.com/aRhtTJf)
+![Listagem, remoção e edição com os métodos http GET, PUT e DELETE](https://ibb.co/2NkdBBb)
 
 Seguem as dependências utilizadas no desenvolvimento e suas versões:
 
@@ -14,8 +14,8 @@ a API Spring Boot está configurada para a porta 9000 para evitar conflitos com 
 O servidor está **configurado para criar automaticamente a tabela de estagiarios** dentro do banco de dados.
 O banco de dados é servido em **localhost:5432/estagiariosdb**.
 Para modificar o banco de dados que servira a API, modificar a url do [jdbc](https://jdbc.postgresql.org/) no arquivo  application.yml
-![/src/main/resources/application.yml](https://imgur.com/ND4trdy) 
-**Trocar estagiariosdb para o nome do DB de preferencia juntamente com a porta e as credenciais. As configurações estão de acordo com a configuração padrão do PostgreSQL**![Trocar estagiariosdb para o nome do DB de preferencia juntamente com a porta e as credenciais.](https://imgur.com/hazUYdD)
+![/src/main/resources/application.yml](https://ibb.co/5rSy15w) 
+**Trocar estagiariosdb para o nome do DB de preferencia juntamente com a porta e as credenciais. As configurações estão de acordo com a configuração padrão do PostgreSQL**![Trocar estagiariosdb para o nome do DB de preferencia juntamente com a porta e as credenciais.](https://ibb.co/qNDXxJQ)
  - Flywaydb para controle de versão e facil implementação do banco de dados. https://flywaydb.org/
 
 ## JAVA  utilizando JDK 11.0.9
@@ -45,3 +45,4 @@ Para instalar as dependências :
 Para rodar o programa do front:
 
     npm run serve
+
