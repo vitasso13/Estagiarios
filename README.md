@@ -1,4 +1,4 @@
-**
+
 
 ## Aplicativo Spring Boot+Vue.js para controle de estagiários
 **Está aplicação implementa e consome uma API REST utilizando Spring Boot com Maven e JAVA + VueJS + PostgreSQL.**
