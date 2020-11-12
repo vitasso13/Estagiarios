@@ -1,13 +1,14 @@
 import Vue from 'vue'
-import App from './App.vue'
+import ControleEstagiarios from './components/controleEstagiarios.vue'
 import ListaEstagiarios from './components/listaEstagiarios.vue'
+
 //import ListaEstagiarios from './components/listaEstagiarios.vue'
 Vue.config.productionTip = false
 
 
 
 new Vue({
-  render: h => h(App),
+  render: h => h(ControleEstagiarios),
 }).$mount('#app');
 
 
