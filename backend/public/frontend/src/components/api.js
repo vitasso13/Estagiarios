@@ -20,6 +20,8 @@ export default {
         url: "http://localhost:9000/api/v1/estagiario",
         data: JSON.stringify(estagiario),
         contentType: 'application/json'
+    }).then(function(){
+        alert("Adicionado com sucesso")
     }),
     // (R)ead
     getAll: () => $.ajax({

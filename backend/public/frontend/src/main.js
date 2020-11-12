@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import ControleEstagiarios from './components/controleEstagiarios.vue'
-import ListaEstagiarios from './components/listaEstagiarios.vue'
+
 
 //import ListaEstagiarios from './components/listaEstagiarios.vue'
 Vue.config.productionTip = false
@@ -12,6 +12,4 @@ new Vue({
 }).$mount('#app');
 
 
-new Vue({
-  render: h => h(ListaEstagiarios),
-}).$mount('#lista');
+

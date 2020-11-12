@@ -1,5 +1,9 @@
 <template>
+
+ 
+ 
   <div class="infos">
+    <h1>Lista de Estagiarios Cadastrados</h1>
     <div v-for="estagiario in estagiarios" :key="estagiario.id">
       <div class="estagiarioMostra">
         <div id="imgbox">
@@ -7,7 +11,14 @@
             height="200"
             alt="Image preview..."
             v-bind:src="getImage(estagiario.foto)"
+            
           />
+          <a id="baixarFoto"
+              v-bind:href="estagiario.foto"
+              title="Baixar comprovante de matrícula"
+              v-bind:download="estagiario.nome + '_foto'"
+            >Baixar foto</a
+            >
         </div>
 
         <div>
@@ -26,8 +37,15 @@
         </div>
 
         <div>
-          <p id="estilo2">Comprovante de Matrícula:<a v-bind:href="estagiario.comprovanteMatricula" title='Baixar comprovante de matrícula' v-bind:download="estagiario.nome+'_ComprovanteDeMatricula'"> Baixar</a></p>
-          
+          <p id="estilo2">
+            Comprovante de Matrícula:
+          </p>
+          <a
+              v-bind:href="estagiario.comprovanteMatricula"
+              title="Baixar comprovante de matrícula"
+              v-bind:download="estagiario.nome + '_ComprovanteDeMatricula'"
+            ><p>Baixar comprovante de matricula</p></a
+            >
         </div>
 
         <div>
@@ -40,7 +58,10 @@
           <textarea v-model="estagiario.dominios"></textarea>
         </div>
 
-        <button id="atualiza" @click="updateEstagiario(estagiario.id, estagiario)">
+        <button
+          id="atualiza"
+          @click="updateEstagiario(estagiario.id, estagiario)"
+        >
           Atualizar</button
         ><button id="remove" @click="deleteEstagiario(estagiario.id)">
           Remover
@@ -53,6 +74,7 @@
 <script>
 import axios from "axios";
 import api from "./api";
+
 export default {
   name: "ListaEstagiarios",
   data() {
@@ -71,19 +93,18 @@ export default {
         function () {
           // convert image file to base64 string
           preview.src = reader.result;
-          that.salvaImagem(JSON.stringify(preview.src))
+          that.salvaImagem(JSON.stringify(preview.src));
         },
         false
       );
 
       if (file) {
-        reader.readAsDataURL(file)
+        reader.readAsDataURL(file);
       }
     },
-    salvaImagem(file){ 
+    salvaImagem(file) {
       this.applicants.foto = file;
       console.log(file);
-
     },
     dataToFile(dataurl) {
       var arr = dataurl.split(","),
@@ -105,14 +126,17 @@ export default {
       var teste = await axios
         .get("http://localhost:9000/api/v1/estagiario")
         .then((response) => {
+          response.data.reverse();
           this.estagiarios = response.data;
           console.log(response);
-          this.estagiarios = response.data;
           this.$forceUpdate();
+          
         })
         .catch((err) => {
+          alert("Erro ao se conectar com o servidor")
           throw err;
         });
+        
       console.log(teste);
       console.log(this.estagiarios);
     },
@@ -130,10 +154,9 @@ export default {
       });
     },
     updateEstagiario(id, estagiario) {
-      api.updateForId(id, estagiario)
-      
+      api.updateForId(id, estagiario);
     },
-    deleteEstagiario: async function(id) {
+    deleteEstagiario: async function (id) {
       await api.removeForId(id);
       this.showEstagiarios();
     },
@@ -141,19 +164,26 @@ export default {
       this.estagiario.splice(1);
     },
   },
-  async mounted() {
+  mounted() {    
     this.showEstagiarios();
   },
 };
+
+
+    
 </script>
 
 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#visa {
-  margin: 20px auto;
-  max-width: 700px;
+#infos {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 label {
   display: block;
@@ -210,16 +240,19 @@ span:hover {
   border-radius: 6px;
   padding: 5px;
 }
-img{
+img {
   max-width: 100%;
-        max-height: 100%;
-        object-fit: cover;
+  max-height: 100%;
+  object-fit: cover;
 }
-#imgbox{
+#imgbox {
   top: 5px;
   left: 3px;
   border: 5px solid black;
   max-width: 300px;
-        max-height: 400px;
+  max-height: 400px;
+}
+#baixarFoto{
+  position: relative;
 }
 </style>
